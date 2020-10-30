@@ -58,9 +58,7 @@ public class RegistrationServlet extends HttpServlet {
 
             Class.forName(driverClassName);
             connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-
             usersRepository = new UsersRepositoryJdbcImpl(connection);
-
         } catch (SQLException | ClassNotFoundException e) {
             throw new IllegalStateException(e);
         }

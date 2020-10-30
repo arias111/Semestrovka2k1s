@@ -18,6 +18,5 @@
         <button type="button" class="registration">REGISTRATION</button>
     </a>
 </form>
-
 </body>
 </html>

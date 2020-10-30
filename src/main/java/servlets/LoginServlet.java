@@ -8,10 +8,7 @@ import services.LoginService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,17 +33,18 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String reg = req.getParameter("reg");
-//        boolean result = loginService.login(username, password);
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> root = new HashMap<>();
         User user = usersRepository.findByUsername(username);
         if(user != null && user.getPassword().equals(password)){
             root.put("name", username);
+            Cookie cookie = new Cookie("username",username);
+            cookie.setMaxAge(0);
+            resp.addCookie(cookie);
             HttpSession session = req.getSession();
-            session.setAttribute("user",username);
+            session.setAttribute("username",username);
             helper.render(req, resp, "profile.ftl", root);
-//            req.getServletContext().getRequestDispatcher("/profile").forward(req,resp);
         }
         if (user != null && !(user.getPassword().equals(password))){
             root.put("message","incorrect password");

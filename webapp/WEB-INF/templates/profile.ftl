@@ -9,6 +9,5 @@
 <form method="post" action="/profile">
     <input type="submit" value="exit" name="exit" class="enter"/>
 </form>
-<img src ="${user.getImagePath()}" height="500" width="500"/>
 </body>
 </html>
