@@ -30,9 +30,17 @@ public class TrainingSearchServlet extends HttpServlet {
     private WorkoutRepository workoutRepository;
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         ObjectMapper objectMapper = new ObjectMapper();
 //        String query = req.getParameter("query");
         List<Workouts> list = workoutRepository.findWorkout();

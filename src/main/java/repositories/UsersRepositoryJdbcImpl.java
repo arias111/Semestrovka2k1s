@@ -1,6 +1,7 @@
 package repositories;
 
 import models.User;
+import singletones.ConnectionProvider;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -30,6 +31,10 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     }
 
     private Connection connection;
+
+    public UsersRepositoryJdbcImpl() {
+        connection = ConnectionProvider.getConnection();
+    }
 
     @Override
     public List<User> findAll() {
@@ -107,6 +112,26 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+    }
+
+    //language=sql
+    private static final String SQL_FIND_ALL_USERS="select * from users where username like ?";
+    
+    @Override
+    public List<User> getAllUsers(String s) {
+        s += '%';
+        List<User> users = new ArrayList<>();
+        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_ALL_USERS)) {
+            preparedStatement.setString(1,s);
+            preparedStatement.execute();
+            ResultSet rs = preparedStatement.getResultSet();
+            while(rs.next()){
+                users.add(userRowMapper.mapRow(rs));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
     }
 
 

@@ -19,6 +19,9 @@ public class MainPageServlet extends HttpServlet {
     private LoginService loginService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         helper.render(req, resp, "mainPage.ftl",new HashMap());
     }
 

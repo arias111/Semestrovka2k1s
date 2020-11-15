@@ -36,7 +36,7 @@ public class ProfileServlet extends HttpServlet {
             Cookie cookie = new Cookie("username","");
             cookie.setMaxAge(0);
             resp.addCookie(cookie);
-            helper.render(req, resp, "login.ftl",new HashMap<>());
+            helper.render(req, resp, "loginTest.ftl",new HashMap<>());
         }
     }
 

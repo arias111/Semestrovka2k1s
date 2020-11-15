@@ -10,7 +10,7 @@
     <p>${message}</p>
 </#if>
 <p>REGISTRATION</p>
-<form method="post" action="/registration">
+<form method="post" action="/registrationn">
     <label>login input</label>
     <input type="text" name="username" placeholder="enter login"/>
     <input type="password" name="password" placeholder="enter password"/>

@@ -1,13 +1,16 @@
 <#ftl encoding="utf-8">
-<!DOCTYPE html>
-<html lang="ru">
+<#include "main.ftl"/>
+
+<#--<!DOCTYPE html>-->
+<#--<html lang="ru">-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<head>
-    <#--    <meta charset="UTF-8">-->
-    <title>registration</title>
-    <meta charset="UTF-8">
-</head>
+<#--<head>-->
+<#--    &lt;#&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<#--    <title>registration</title>-->
+<#--    <meta charset="UTF-8">-->
+<#--</head>-->
+<@main title="registration"/>
 
 <style>
     body{    margin: 0px;
@@ -176,17 +179,16 @@
         transition: all 0.5s ease 0s;
     }
 </style>
-
-<body>
+<#macro content>
 <#--<div class="container">-->
 <#--    <div class="row">-->
-<div class = "top_menu">
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-        <a class="mx-auto navbar-brand" href="http://localhost:8080/registration">
-            <#--                    TODO(поменяй на 8081 и ссылку на сервлет с меню)-->
-            <img src="https://dfd5gcc6b7vw5.cloudfront.net/assets/logo-8a7bb8b7de46c1b7163081c1d735c55860cf8d83689ad0a98a1865826a82b7cc.svg" width="34" height="34" class="d-inline-block align-top" alt="Thenx">
-        </a>    </nav>
-</div>
+    <div class = "top_menu">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+            <a class="mx-auto navbar-brand" href="http://localhost:8086/registration">
+                <#--                    TODO(поменяй на 8081 и ссылку на сервлет с меню)-->
+                <img src="https://dfd5gcc6b7vw5.cloudfront.net/assets/logo-8a7bb8b7de46c1b7163081c1d735c55860cf8d83689ad0a98a1865826a82b7cc.svg" width="34" height="34" class="d-inline-block align-top" alt="Thenx">
+            </a>    </nav>
+    </div>
 
 
 
@@ -197,35 +199,36 @@
 <#--            <a href="http://localhost:8081/registration">-->
 <#--                <button type="button" class="registration">REGISTRATION</button>-->
 <#--            </a>-->
-<div class="container">
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-            <#if message?has_content>
-                <p>${message}</p>
-            </#if>
-            <form method="post" action="/registration">
-                <div class="form-horizontal">
-                    <span class="heading">РЕГИСТРАЦИЯ</span>
-                    <#--                <form method="post" action="/login">-->
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="inputEmail " name="username" placeholder="username">
-                        <#--                    TODO(name должен быть username)-->
-                        <i class="fa fa-user"></i>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <#if message?has_content>
+                    <p>${message}</p>
+                </#if>
+                <form method="post" action="/registration">
+                    <div class="form-horizontal">
+                        <span class="heading">РЕГИСТРАЦИЯ</span>
+                        <#--                <form method="post" action="/login">-->
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="inputEmail " name="username" placeholder="username">
+                            <#--                    TODO(name должен быть username)-->
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="form-group help">
+                            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-default" value="Создать аккаунт">
+                        </div>
                     </div>
-                    <div class="form-group help">
-                        <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password">
-                        <i class="fa fa-lock"></i>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-default" value="Создать аккаунт">
-                    </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
 
-    </div><!-- /.row -->
-</div><!-- /.container -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
 <#--</form>-->
 
-</body>
+</#macro>
+
 </html>

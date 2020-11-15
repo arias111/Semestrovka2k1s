@@ -9,7 +9,7 @@
 <#if message?has_content>
     <p>${message}</p>
 </#if>
-<form method="post" action="/login">
+<form method="post" action="/loginn">
     <label>login input</label>
     <input type="text" name="username" placeholder="enter login"/>
     <input type="password" name="password" placeholder="enter password"/>

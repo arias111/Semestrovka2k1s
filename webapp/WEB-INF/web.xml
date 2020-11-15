@@ -3,28 +3,14 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-<servlet>
-    <servlet-name>SetCookiesServlet</servlet-name>
-    <servlet-class>servlets.SetCookiesServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>SetCookiesServlet</servlet-name>
-    <url-pattern>/set-cookies</url-pattern>
-</servlet-mapping>
-    <servlet>
-        <servlet-name>GetCookiesServlet</servlet-name>
-        <servlet-class>servlets.GetCookiesServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GetCookiesServlet</servlet-name>
-        <url-pattern>/get-cookies</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>
         <url-pattern>*.html</url-pattern>
         <url-pattern>*.png</url-pattern>
         <url-pattern>*.jpg</url-pattern>
+        <url-pattern>*.photo</url-pattern>
     </servlet-mapping>
 
 

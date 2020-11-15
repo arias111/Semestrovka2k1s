@@ -12,6 +12,7 @@
           <element id="library" level="project" name="postgresql-42.2.2" />
           <element id="library" level="project" name="postgresql-42.0.0" />
           <element id="library" level="project" name="jackson-databind-2.9.5" />
+          <element id="library" level="project" name="jbcrypt-0.3m" />
         </element>
         <element id="directory" name="classes">
           <element id="module-output" name="servletBasics" />

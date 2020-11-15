@@ -1,6 +1,7 @@
 package servlets;
 
 import models.User;
+import org.mindrot.jbcrypt.BCrypt;
 import repositories.UsersRepository;
 import repositories.UsersRepositoryJdbcImpl;
 import services.Helper;
@@ -23,15 +24,17 @@ public class RegistrationServlet extends HttpServlet {
     private LoginService loginService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        helper.render(req, resp, "registrationTest.ftl",new HashMap<>());
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        helper.render(req, resp, "registrationTest.ftl",new HashMap<>());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> root = new HashMap<>();

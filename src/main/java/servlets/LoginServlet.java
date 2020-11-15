@@ -6,6 +6,7 @@ import repositories.UsersRepositoryJdbcImpl;
 import services.Helper;
 import services.LoginService;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -22,11 +23,13 @@ import java.util.Map;
 public class LoginServlet extends HttpServlet {
     private Helper helper;
     private LoginService loginService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        helper.render(req, resp, "loginTest.ftl",new HashMap());
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        helper.render(req, resp, "loginTest.ftl",new HashMap());
     }
 
     @Override
@@ -34,6 +37,7 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String reg = req.getParameter("reg");
+        req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> root = new HashMap<>();
@@ -46,6 +50,14 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("username",username);
             helper.render(req, resp, "profile.ftl", root);
+        }
+        if(username.isEmpty() || password.isEmpty()){
+            root.put("message","Empty fields");
+            helper.render(req,resp,"loginTest.ftl",root);
+        }else{
+            {
+
+            }
         }
         if (user != null && !(user.getPassword().equals(password))){
             root.put("message","incorrect password");

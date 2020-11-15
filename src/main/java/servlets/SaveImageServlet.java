@@ -1,34 +1,29 @@
 //package servlets;
 //
 //import models.User;
-//import repositories.UsersRepository;
-//import repositories.UsersRepositoryJdbcImpl;
-//import services.FileSaver;
-//import services.FileSaverImpl;
 //import services.Helper;
+//import services.FileSaverImpl;
+//import services.UserService;
 //
 //import javax.servlet.ServletException;
 //import javax.servlet.annotation.MultipartConfig;
 //import javax.servlet.annotation.WebServlet;
-//import javax.servlet.http.HttpServlet;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
-//import javax.servlet.http.Part;
+//import javax.servlet.http.*;
 //import java.io.File;
 //import java.io.IOException;
-//import java.util.HashMap;
 //import java.util.Optional;
 //
-//@WebServlet("/saveImage")
+//
+//@WebServlet("/photo")
 //@MultipartConfig
 //public class SaveImageServlet extends HttpServlet {
-//    private FileSaver fileSaver;
-//    private UsersRepository studentsDao;
+//    private FileSaverImpl fileSaver;
+//    private UserService userService;
 //    private Helper helper;
 //
 //    @Override
 //    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        helper.render(req, resp, "file_load.ftl", new HashMap<>());
+//        resp.sendRedirect("/profile");
 //    }
 //
 //    @Override
@@ -37,25 +32,24 @@
 //        Part photoPart = req.getPart("photo");
 //        Optional<String> resultOfFileSaving = fileSaver.saveFile(photoPart, id);
 //        if (resultOfFileSaving.isPresent()) {
-//            Optional<User> studentCandidate = studentsDao.find(Long.parseLong(id));
-//            if (studentCandidate.isPresent()) {
-//                User user = studentCandidate.get();
+//            Optional<User> userCandidate = userService.findUserById(Long.parseLong(id));
+//            if (userCandidate.isPresent()) {
+//                User user = userCandidate.get();
 //                user.setImagePath(resultOfFileSaving.get());
-//                studentsDao.update(user);
+//                userService.update(user);
 //                resp.sendRedirect("/profile?userid=" + id);
 //            } else {
-////поругаться на сохранение файла несуществующему пользователю
+//                //поругаться на сохранение файла несуществующему пользователю
 //            }
 //        } else {
-////выдать сообщение что файл не удалось сохранить так как он пустой
+//            //выдать сообщение что файл не удалось сохранить так как он пустой
 //        }
 //    }
 //
 //    @Override
 //    public void init() throws ServletException {
 //        fileSaver = new FileSaverImpl(getServletContext().getRealPath(""));
-//        studentsDao = new UsersRepository();
+//        userService = new UserService();
 //        helper = new Helper();
 //    }
 //}
-//
