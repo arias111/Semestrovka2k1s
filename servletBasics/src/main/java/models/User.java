@@ -6,6 +6,11 @@ import java.util.Objects;
 
 @Builder
 public class User {
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -23,6 +28,7 @@ public class User {
     private Long id;
     private String username;
     private String password;
+//    private  String imagePath;
 
     public User(Long id, String username, String password) {
         this.id = id;
@@ -30,10 +36,8 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+//    public String getImagePath(){ return imagePath; }
+//
 
 
     public String getUsername() {

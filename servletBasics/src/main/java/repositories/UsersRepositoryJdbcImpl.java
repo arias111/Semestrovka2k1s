@@ -1,6 +1,7 @@
 package repositories;
 
 import models.User;
+import singletones.ConnectionProvider;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -23,13 +24,17 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     private static final String SQL_INSERT_USER = "INSERT INTO users (username,password) VALUES (?, ?)";
 
     //language=SQL
-    private static final String SQLUpdate = "UPDATE users SET username = ?, password = ?, filepath = ? WHERE id = ?";
+    private static final String SQL_UPDATE_USER = "UPDATE users SET username = ?, password = ?, filepath = ? WHERE id = ?";
     public UsersRepositoryJdbcImpl(Connection connection){
         this.connection = connection;
 
     }
 
     private Connection connection;
+
+    public UsersRepositoryJdbcImpl() {
+        connection = ConnectionProvider.getConnection();
+    }
 
     @Override
     public List<User> findAll() {
@@ -88,6 +93,11 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     }
 
     @Override
+    public List<User> findAllTrainingsLikePattern(String pattern) {
+        return null;
+    }
+
+    @Override
     public User insertUser(String username, String password) {
         try {
             PreparedStatement statement = connection.prepareStatement(SQL_INSERT_USER);
@@ -104,14 +114,53 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
         }
     }
 
+    //language=sql
+    private static final String SQL_FIND_ALL_USERS="select * from users where username like ?";
+    
+    @Override
+    public List<User> getAllUsers(String s) {
+        s += '%';
+        List<User> users = new ArrayList<>();
+        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_ALL_USERS)) {
+            preparedStatement.setString(1,s);
+            preparedStatement.execute();
+            ResultSet rs = preparedStatement.getResultSet();
+            while(rs.next()){
+                users.add(userRowMapper.mapRow(rs));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
+    }
+
+
+    private RowMapper<User> userRowMapper = row -> {
+        String password = row.getString("password");
+        String username = row.getString("username");
+        return new User(username,password);
+    };
+
+
     @Override
     public void safe(User entity) {
 
     }
+    //language=sql
+    public static final String SQLUpdate = "UPDATE users SET username = ?, password = ?  WHERE id = ?";
 
     @Override
-    public void update(User entity) {
-
+    public void update(User user) {
+        try (PreparedStatement statement = connection.prepareStatement(SQLUpdate)) {
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPassword());
+            int updRows = statement.executeUpdate();
+            if (updRows == 0) {
+                throw new SQLException();
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     @Override
