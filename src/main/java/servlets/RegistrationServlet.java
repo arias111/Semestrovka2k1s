@@ -23,7 +23,9 @@ public class RegistrationServlet extends HttpServlet {
     private LoginService loginService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        helper.render(req, resp, "registration.ftl",new HashMap<>());
+        helper.render(req, resp, "registrationTest.ftl",new HashMap<>());
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
     }
 
     @Override
@@ -36,11 +38,11 @@ public class RegistrationServlet extends HttpServlet {
         User user = usersRepository.findByUsername(username);
         if (user == null) {
             root.put("message", "You are registered");
-            helper.render(req, resp, "login.ftl", root);
+            helper.render(req, resp, "loginTest.ftl", root);
             usersRepository.insertUser(username, password);
         } else {
             root.put("message", "You already have account");
-            helper.render(req, resp, "login.ftl", root);
+            helper.render(req, resp, "loginTest.ftl", root);
         }
     }
 

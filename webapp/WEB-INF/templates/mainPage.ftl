@@ -12,7 +12,10 @@
 <form method="post" action="/mainPage">
     <div class="block">
         <input type="submit" name="start" value="mainPage" class="start"/>
+        <input type="submit" name="workout" value="workout"/>
     </div>
+
+
 </form>
 </body>
 </html>

@@ -24,8 +24,9 @@ public class LoginServlet extends HttpServlet {
     private LoginService loginService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        helper.render(req, resp, "login.ftl",new HashMap());
-
+        helper.render(req, resp, "loginTest.ftl",new HashMap());
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
     }
 
     @Override
@@ -48,11 +49,11 @@ public class LoginServlet extends HttpServlet {
         }
         if (user != null && !(user.getPassword().equals(password))){
             root.put("message","incorrect password");
-            helper.render(req, resp, "login.ftl", root);
+            helper.render(req, resp, "loginTest.ftl", root);
         }
         if (user == null){
             root.put("message","User not found");
-            helper.render(req, resp, "login.ftl", root);
+            helper.render(req, resp, "loginTest.ftl", root);
         }
     }
     private Connection connection;

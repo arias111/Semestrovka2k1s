@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@WebServlet(urlPatterns = {"/mainPage","/"})
+@WebServlet("/mainPage")
 public class MainPageServlet extends HttpServlet {
     private Helper helper;
     private LoginService loginService;
@@ -25,9 +25,12 @@ public class MainPageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String start = req.getParameter("start");
+        String workout = req.getParameter("workout");
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
-        Map<String, Object> root = new HashMap<>();
+        if (workout.equals("workout")){
+            helper.render(req, resp, "workouts.ftl",new HashMap());
+        }
     }   
     @Override
     public void init() throws ServletException {

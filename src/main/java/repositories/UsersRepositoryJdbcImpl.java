@@ -108,24 +108,7 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
             throw new IllegalStateException(e);
         }
     }
-    //language=sql
-    private final String SQL_SELECT_BY_Training_LIKE = "SELECT * FROM workouts where workout like ?";
 
-    public List<User> findAllTrainingsWithNameLikePattern(String pattern) {
-        List<User> user = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_BY_Training_LIKE)) {
-            preparedStatement.setString(1, "%" + pattern + "%");
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    user.add(userRowMapper.mapRow(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            throw new IllegalStateException(e);
-        }
-        return user;
-
-    }
 
     private RowMapper<User> userRowMapper = row -> {
         String password = row.getString("password");
