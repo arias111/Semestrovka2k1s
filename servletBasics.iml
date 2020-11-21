@@ -38,5 +38,6 @@
     <orderEntry type="library" name="jackson-core-2.9.5" level="project" />
     <orderEntry type="library" name="jackson-annotations-2.9.0" level="project" />
     <orderEntry type="library" name="jbcrypt-0.3m" level="project" />
+    <orderEntry type="library" name="bootstrap" level="application" />
   </component>
 </module>

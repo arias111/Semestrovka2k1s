@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/profile")
+@WebServlet("/profil")
 public class ProfileServlet extends HttpServlet {
     private Helper helper;
     private LoginService loginService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        helper.render(req, resp, "profile.ftl",new HashMap<>());
+        helper.render(req, resp, "profil.ftl",new HashMap<>());
     }
 
     @Override
